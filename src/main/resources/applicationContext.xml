@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:cache="http://www.springframework.org/schema/cache" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:property-placeholder file-encoding="utf-8" location="classpath:context-static.properties"/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <task:annotation-driven executor="asyncExecutor"/>
+    <bean id="asyncExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="${threadPoolTaskExecutor.asyncExecutor.corePoolSize}"/>
+        <property name="maxPoolSize" value="${threadPoolTaskExecutor.asyncExecutor.maxPoolSize}"/>
+        <property name="queueCapacity" value="${threadPoolTaskExecutor.asyncExecutor.queueCapacity}"/>
+    </bean>
+
+    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
+
+    <!--<bean id="defaultSource" class="com.minsu.structure.DataSourceFactory" destroy-method="close"/>-->
+
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <!--<property name="configLocation" value="classpath:mybatis-config.xml"/>-->
+        <!--<property name="mapperLocations" value="classpath:mapper/**/*.xml"/>-->
+    <!--</bean>-->
+
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <!--<bean name="genericObjectPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">-->
+        <!--<property name="maxWaitMillis" value="${redis.pool.maxWait}"/>-->
+        <!--<property name="maxTotal" value="${redis.pool.maxTotal}"/>-->
+        <!--<property name="maxIdle" value="${redis.pool.maxIdle}"/>-->
+        <!--<property name="testOnBorrow" value="${redis.pool.testOnBorrow}"/>-->
+        <!--<property name="testWhileIdle" value="${redis.pool.testWhileIdle}"/>-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="${redis.pool.timeBetweenEvictionRunsMillis}"/>-->
+        <!--<property name="minEvictableIdleTimeMillis" value="${redis.pool.minEvictableIdleTimeMillis}"/>-->
+        <!--<property name="numTestsPerEvictionRun" value="${redis.pool.numTestsPerEvictionRun}"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="jedisCluster" class="com.pingan.ela.structure.ex.JedisClusterFactory">-->
+        <!--<property name="addressConfig" value="classpath:context-ela-static.properties"/>-->
+        <!--<property name="addressKeyPrefix" value="redis.cluster.address"/>-->
+        <!--<property name="timeout" value="${redis.cluster.timeout}"/>-->
+        <!--<property name="maxAttempts" value="${redis.cluster.maxRedirections}"/>-->
+        <!--<property name="genericObjectPoolConfig" ref="genericObjectPoolConfig"/>-->
+    <!--</bean>-->
+
+    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor"/>
+
+    <!--<bean name="mappingJackson2HttpMessageConverter"-->
+          <!--class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+        <!--<property name="objectMapper" ref="objectMapperEx"/>-->
+    <!--</bean>-->
+
+    <!--<bean name="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--&lt;!&ndash;<property name="autoStartup" value="false"/>&ndash;&gt;-->
+        <!--<property name="dataSource" ref="defaultSource"/>-->
+        <!--<property name="overwriteExistingJobs" value="true"/>-->
+        <!--<property name="startupDelay" value="15"/>-->
+        <!--<property name="configLocation" value="classpath:quartz.properties"/>-->
+        <!--<property name="jobFactory" ref="springBeanJobFactoryEx"/>-->
+        <!--<property name="applicationContextSchedulerContextKey" value="applicationContext"/>-->
+    <!--</bean>-->
+
+</beans>
